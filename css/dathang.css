@@ -1,0 +1,160 @@
+.header-title{
+    width: 100%;
+    background-color: #fff;
+    color: red;
+    margin-top: 95px;
+    font-size: 24px;
+    padding: 20px 20px;
+}
+
+.header-title p{
+    margin-left: 180px;
+}
+
+.header-title p a{
+    color: red;
+    padding-right: 12px;
+    border-right: 1px solid red;
+}
+
+.address{
+    width: 75%;
+    background-color: #fff;
+    margin: 15px 0px;
+    justify-self: center;
+    border-radius: 5px;
+}
+
+.address .rim{
+    background-image: repeating-linear-gradient(45deg, #6fa6d6, #6fa6d6 33px, transparent 0, transparent 41px, #f18d9b 0, #f18d9b 74px, transparent 0, transparent 82px);
+    background-position-x: -30px;
+    background-size: 116px 3px;
+    height: 3px;
+    width: 100%;
+}
+
+.address .title{
+    color: red;
+    font-size: 2.2em;
+    padding: 10px 20px;
+}
+
+.address .info-order{
+    color: black;
+    margin-top: 10px;
+}
+
+.address .info-order p{
+    padding: 5px 0px;
+    font-size: .8em;
+}
+
+.address .info-address{
+    display: flex;
+    font-size: 1.8em;
+    padding: 0px 20px 20px 20px;
+}
+
+.address .info-address p{
+    margin-top: 3px;
+}
+
+.address .info-address input{
+    margin-left: 5px;
+    width: 300px;
+    border: none;
+    font-size: 1em;
+    border-bottom: 1px solid black;
+    
+}
+
+
+.info-product table{
+    margin: 0 auto; 
+    color: black; 
+    font-size: 1.6em; 
+    width:75%; 
+    padding: 20px 0px 0px 20px; 
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.wrapper-order{
+    width: 75%;
+    background-color: #fff;
+    justify-self: center;
+    margin-top: 15px;
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+
+.wrapper-order .payment{
+    padding: 20px 20px;
+    font-size: 1.6em;
+    border-bottom: 1px dotted black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper-order .payment .radio-inputs {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+    background-color: #EEE;
+    box-sizing: border-box;
+    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+    padding: 0.25rem;
+    width: 400px;
+    font-size: 14px;
+}
+  
+.wrapper-order .payment .radio-inputs .radio {
+    flex: 1 1 auto;
+    text-align: center;
+}
+  
+.wrapper-order .payment .radio-inputs .radio input {
+    display: none;
+}
+  
+.wrapper-order .payment .radio-inputs .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 0;
+    color: rgba(51, 65, 85, 1);
+    transition: all .15s ease-in-out;
+}
+  
+.wrapper-order .payment .radio-inputs .radio input:checked + .name {
+    background-color: #fff;
+    font-weight: 600;
+}
+
+.wrapper-order #momo-buttons ul{
+    list-style-type: none;
+    margin-bottom: 15px;
+}
+
+.wrapper-order #momo-buttons button{
+    padding: 10px 10px;
+    width: 200px;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+    cursor: pointer;
+    margin: 15px 30px 0px 50px;
+    text-transform: none;
+    border-radius: 5px;
+    background-color: red;
+    color: #fff;
+}
+
+.wrapper-order table{
+   justify-self: right;
+   padding:20px;
+}

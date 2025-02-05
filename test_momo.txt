@@ -1,0 +1,12 @@
+NGUYEN VAN A	9704 0000 0000 0018	03/07	OTP	Thành công  0917300003	khong thanh cong 0916004000
+
+NGUYEN VAN A	9704 0000 0000 0026	03/07	OTP	Thẻ bị khóa  
+
+NGUYEN VAN A	9704 0000 0000 0034	03/07	OTP	Nguồn tiền không đủ  0917003000
+
+
+
+credit cart
+5200 0000 0000 1096       05/25         111         Thành công
+
+5200 0000 0000 1104       05/25         111         Không thành công

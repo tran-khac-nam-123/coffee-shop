@@ -1,0 +1,200 @@
+.wrapper-container{
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper-card{
+    width: 23%;
+    margin: 13em 0px 17em 0px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.wrapper-card .card{
+    text-align: center;
+}
+
+.wrapper-card .card img{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.wrapper-card .card h2{
+    color: #2c384e;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: none;
+    margin-bottom: 5px;
+}
+
+.wrapper-card .card h3{
+    font-size: 18px;
+    text-transform: none;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+.wrapper-card .card .social-links{
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper-card .card .social-links a{
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    color: rgba(1, 41, 112, 0.5);
+
+}
+
+.wrapper-card .card .social-links a:hover{
+    color: black;
+}
+
+.container {
+    width: 45%;
+    margin: 8em 0px 8em 1em;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.6em;
+}
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+}
+.tab:hover{
+    color: blue;
+}
+.tab.active {
+    color: blue;
+    border-bottom: 1px solid blue;
+}
+.content {
+    padding: 20px;
+}
+.content section {
+    display: none;
+}
+.content section.active {
+    display: block;
+}
+.details {
+    line-height: 1.9;
+}
+.details b {
+    display: inline-block;
+    width: 150px;
+}
+
+.content .active .details p{
+    padding-bottom: 10px;
+}
+
+.edit {
+    display: flex;
+    justify-content: space-between;
+}
+.edit div {
+    flex: 1;
+    /* margin: 0 10px; */
+    display: flex;
+    flex-direction: column;
+}
+.edit label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+.edit .input-style {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+.edit .input-style:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.edit button {
+    margin-top: 1em;
+    background-color: #444141;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    padding: 12px 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    align-self: center;
+}
+   
+.edit button:hover {
+    background-color: rgb(40, 40, 234);
+}
+
+.change-password {
+    display: flex;
+    justify-content: space-between;
+}
+.change-password div {
+    flex: 1;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+}
+.change-password label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+.change-password .input-style {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+.change-password .input-style:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.change-password button {
+    margin-top: 1em;
+    background-color: #444141;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    padding: 12px 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: none;
+    align-self: center;
+}
+   
+.change-password button:hover {
+    background-color: rgb(40, 40, 234);
+}
+   
