@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: localhost
--- Thời gian đã tạo: Th6 17, 2022 lúc 03:11 PM
--- Phiên bản máy phục vụ: 8.0.17
--- Phiên bản PHP: 7.3.10
+-- Máy chủ: localhost:3806
+-- Thời gian đã tạo: Th3 16, 2025 lúc 01:04 PM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `bancaphe`
+-- Cơ sở dữ liệu: `coffees`
 --
 
 -- --------------------------------------------------------
@@ -30,16 +29,63 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tbl_admin` (
   `id_admin` int(11) NOT NULL,
-  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+  `fullname` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_admin`
 --
 
-INSERT INTO `tbl_admin` (`id_admin`, `username`, `password`) VALUES
-(1, 'admin', 'c4ca4238a0b923820dcc509a6f75849b');
+INSERT INTO `tbl_admin` (`id_admin`, `fullname`, `username`, `email`, `password`) VALUES
+(1, 'Trần Khắc Nam', 'admin', 'khacnam123@gmail.com', 'n@m123');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tbl_blog`
+--
+
+CREATE TABLE `tbl_blog` (
+  `id_blog` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `author` varchar(150) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `content` text NOT NULL,
+  `pictures` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_blog`
+--
+
+INSERT INTO `tbl_blog` (`id_blog`, `name`, `author`, `created_at`, `content`, `pictures`) VALUES
+(1, 'Cappuccino – Tách Cà Phê Ý Đậm Đà Hương Vị', 'Phạm Minh Tâm', '2024-11-22 17:00:00', 'Cappuccino là một trong những loại cà phê nổi tiếng nhất đến từ Ý, được yêu thích trên toàn thế giới. Thức uống này là sự kết hợp hoàn hảo giữa ba lớp: espresso đậm đà, sữa nóng mềm mại và lớp bọt sữa mịn màng ở trên. Thông thường, cappuccino được phục vụ trong những tách nhỏ với một chút bột cacao hoặc quế rắc lên trên để tăng hương vị. Đây là lựa chọn lý tưởng cho những buổi sáng nhẹ nhàng hoặc những khoảnh khắc thư giãn trong ngày.', 'blog-1.jpeg'),
+(2, 'Macchiato – Điểm Nhấn Tinh Tế Của Espresso', 'Lê Huy Hoàng', '2024-11-10 17:00:00', 'Macchiato, trong tiếng Ý có nghĩa là \"đốm\" hoặc \"vết\", là loại cà phê được biến tấu từ espresso. Macchiato truyền thống là một tách espresso đậm đặc với một lớp sữa nóng hoặc bọt sữa nhỏ ở trên, tạo nên hương vị cân bằng giữa vị đắng của cà phê và vị béo nhẹ của sữa. Hiện nay, macchiato còn được biến tấu với nhiều phong cách hiện đại, như caramel macchiato – cà phê thêm caramel và sữa, mang lại hương vị ngọt ngào và thơm lừng.', 'blog-2.jpeg'),
+(3, 'Latte – Hương Vị Dịu Dàng Cho Tâm Hồn', 'Trần Phương Thảo', '2024-11-24 17:00:00', 'Latte là thức uống cà phê được pha chế với tỷ lệ sữa nóng lớn hơn espresso. Điều này tạo nên một tách cà phê có vị nhẹ nhàng, phù hợp với những người không thích vị đắng mạnh. Một ly latte thường đi kèm với nghệ thuật tạo hình trên lớp bọt sữa mịn, gọi là \"latte art\", khiến thức uống này không chỉ ngon mà còn đẹp mắt. Latte là lựa chọn hoàn hảo để thưởng thức vào buổi chiều cùng bạn bè hay trong không gian làm việc sáng tạo.', 'blog-3.jpeg');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tbl_cart`
+--
+
+CREATE TABLE `tbl_cart` (
+  `id_cart` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_cart`
+--
+
+INSERT INTO `tbl_cart` (`id_cart`, `id_user`, `created_at`) VALUES
+(30, 14, '2024-12-18 02:40:26'),
+(34, 12, '2024-12-20 10:14:29'),
+(35, 4, '2024-12-24 06:59:28');
 
 -- --------------------------------------------------------
 
@@ -49,100 +95,478 @@ INSERT INTO `tbl_admin` (`id_admin`, `username`, `password`) VALUES
 
 CREATE TABLE `tbl_cart_detail` (
   `id_cart_detail` int(11) NOT NULL,
-  `code_cart` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_cart` int(11) NOT NULL,
   `id_sanpham` int(11) NOT NULL,
-  `soluongmua` int(11) NOT NULL
+  `soluong` int(11) NOT NULL,
+  `price` double NOT NULL,
+  `total` double GENERATED ALWAYS AS (`soluong` * `price`) STORED
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_cart_detail`
 --
 
-INSERT INTO `tbl_cart_detail` (`id_cart_detail`, `code_cart`, `id_sanpham`, `soluongmua`) VALUES
-(28, '4095', 8, 2),
-(29, '4095', 7, 1),
-(34, '4469', 12, 1),
-(35, '4469', 13, 1),
-(36, '6875', 12, 1),
-(37, '6875', 13, 1),
-(38, '3524', 12, 1),
-(39, '3524', 13, 1),
-(40, '8326', 14, 1),
-(41, '8326', 16, 1);
+INSERT INTO `tbl_cart_detail` (`id_cart_detail`, `id_cart`, `id_sanpham`, `soluong`, `price`) VALUES
+(67, 30, 1, 1, 220000),
+(68, 30, 2, 1, 280000),
+(69, 30, 3, 1, 250000),
+(70, 30, 1, 1, 220000),
+(71, 30, 2, 1, 280000),
+(72, 30, 1, 1, 220000),
+(79, 34, 1, 2, 220000),
+(80, 34, 1, 1, 220000),
+(81, 34, 1, 2, 220000),
+(82, 34, 2, 1, 280000),
+(83, 35, 3, 2, 250000),
+(84, 35, 1, 3, 220000),
+(85, 35, 2, 2, 280000),
+(86, 35, 1, 3, 220000),
+(87, 35, 2, 3, 280000),
+(88, 35, 6, 3, 250000),
+(89, 35, 3, 3, 250000),
+(90, 35, 1, 3, 220000),
+(91, 35, 3, 2, 250000),
+(92, 35, 10, 4, 210000),
+(93, 35, 2, 1, 280000),
+(94, 35, 4, 3, 190000),
+(95, 35, 2, 2, 280000),
+(96, 35, 1, 2, 220000),
+(97, 35, 3, 2, 250000),
+(98, 35, 5, 3, 290000),
+(99, 35, 2, 2, 280000),
+(100, 35, 1, 3, 220000),
+(101, 35, 2, 3, 280000),
+(102, 35, 3, 3, 250000),
+(103, 35, 1, 3, 220000),
+(104, 35, 2, 2, 280000),
+(105, 35, 1, 3, 220000),
+(106, 35, 3, 4, 250000),
+(107, 35, 1, 1, 220000),
+(108, 35, 1, 3, 220000),
+(109, 35, 2, 2, 280000),
+(110, 35, 1, 1, 220000),
+(111, 35, 2, 1, 280000),
+(112, 35, 2, 3, 280000),
+(113, 35, 3, 3, 250000),
+(114, 35, 1, 1, 220000),
+(115, 35, 2, 2, 280000),
+(116, 35, 1, 3, 220000),
+(117, 35, 3, 2, 250000),
+(118, 35, 3, 3, 250000),
+(119, 35, 1, 2, 220000),
+(120, 35, 2, 4, 280000),
+(121, 35, 1, 1, 220000),
+(122, 35, 5, 3, 290000),
+(123, 35, 1, 1, 220000),
+(124, 35, 2, 1, 280000),
+(125, 35, 1, 3, 220000),
+(126, 35, 1, 2, 220000),
+(127, 35, 4, 3, 190000),
+(128, 35, 6, 3, 250000),
+(129, 35, 1, 4, 220000),
+(130, 35, 1, 2, 220000),
+(131, 35, 2, 1, 280000),
+(132, 35, 2, 3, 280000),
+(133, 35, 1, 3, 220000),
+(134, 35, 2, 2, 280000),
+(135, 35, 1, 2, 220000),
+(136, 35, 2, 2, 280000),
+(137, 35, 1, 1, 220000),
+(138, 35, 1, 2, 220000),
+(139, 35, 1, 1, 220000),
+(140, 35, 2, 3, 280000),
+(141, 35, 1, 2, 220000),
+(142, 35, 3, 3, 250000),
+(143, 35, 1, 3, 220000),
+(144, 35, 2, 2, 280000),
+(145, 35, 3, 2, 250000),
+(146, 35, 1, 3, 220000),
+(147, 35, 1, 2, 220000),
+(148, 35, 3, 3, 250000),
+(149, 35, 1, 4, 220000),
+(150, 35, 2, 3, 280000),
+(151, 35, 1, 2, 220000),
+(152, 35, 2, 4, 280000),
+(153, 35, 1, 3, 220000),
+(154, 35, 6, 2, 250000),
+(155, 35, 1, 2, 220000),
+(156, 35, 2, 3, 280000),
+(157, 35, 1, 1, 220000),
+(158, 35, 2, 2, 280000),
+(159, 35, 1, 3, 220000),
+(160, 35, 2, 2, 280000),
+(161, 35, 1, 1, 220000),
+(162, 35, 3, 4, 250000),
+(163, 35, 1, 3, 220000),
+(164, 35, 2, 3, 280000),
+(165, 35, 1, 2, 220000),
+(166, 35, 5, 3, 290000),
+(167, 35, 4, 4, 190000),
+(168, 35, 6, 3, 250000),
+(169, 35, 10, 3, 210000),
+(170, 35, 1, 1, 220000),
+(171, 35, 2, 2, 280000),
+(172, 35, 1, 2, 220000),
+(173, 35, 5, 4, 290000),
+(174, 35, 2, 3, 280000),
+(175, 35, 4, 2, 190000),
+(176, 35, 2, 2, 280000),
+(177, 35, 1, 2, 220000),
+(178, 35, 4, 3, 190000),
+(179, 35, 3, 3, 250000),
+(180, 35, 5, 3, 290000),
+(181, 35, 1, 2, 220000),
+(182, 35, 2, 1, 280000),
+(183, 35, 2, 1, 280000),
+(184, 35, 4, 1, 190000),
+(185, 35, 2, 3, 280000),
+(186, 35, 1, 2, 220000),
+(187, 35, 3, 2, 250000),
+(188, 35, 1, 2, 220000),
+(189, 35, 2, 2, 280000),
+(190, 35, 1, 3, 220000),
+(191, 35, 1, 2, 220000),
+(192, 35, 5, 3, 290000),
+(193, 35, 4, 2, 190000),
+(194, 35, 1, 4, 220000),
+(195, 35, 2, 2, 280000),
+(196, 35, 6, 3, 250000),
+(197, 35, 2, 2, 280000),
+(198, 35, 1, 1, 220000),
+(199, 35, 1, 1, 220000);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_dangky`
+-- Cấu trúc bảng cho bảng `tbl_category`
 --
 
-CREATE TABLE `tbl_dangky` (
-  `id_khachhang` int(11) NOT NULL,
-  `hovaten` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `taikhoan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `matkhau` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sodienthoai` int(11) NOT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `diachi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `chucvu` int(11) NOT NULL
+CREATE TABLE `tbl_category` (
+  `id_category` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_dangky`
+-- Đang đổ dữ liệu cho bảng `tbl_category`
 --
 
-INSERT INTO `tbl_dangky` (`id_khachhang`, `hovaten`, `taikhoan`, `matkhau`, `sodienthoai`, `email`, `diachi`, `chucvu`) VALUES
-(1, 'Nguyễn Minh Tâm', 'maki', 'c4ca4238a0b923820dcc509a6f75849b', 569029353, 'mikuohandsome@gmail.com', '13/C', 1),
-(9, 'Lê Văn Hùng', 'lehung', '202cb962ac59075b964b07152d234b70', 123456, 'lehung@gmail.com', 'Thanh Hóa', 0);
+INSERT INTO `tbl_category` (`id_category`, `name`) VALUES
+(1, 'Cà phê xay'),
+(2, 'Đồ uống');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_danhmuc`
+-- Cấu trúc bảng cho bảng `tbl_contact`
 --
 
-CREATE TABLE `tbl_danhmuc` (
-  `id_danhmuc` int(11) NOT NULL,
-  `tendanhmuc` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thutu` int(11) NOT NULL
+CREATE TABLE `tbl_contact` (
+  `id_contact` int(11) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `fullname` varchar(250) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` enum('Chưa xem','Đã xem') DEFAULT 'Chưa xem'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_danhmuc`
+-- Đang đổ dữ liệu cho bảng `tbl_contact`
 --
 
-INSERT INTO `tbl_danhmuc` (`id_danhmuc`, `tendanhmuc`, `thutu`) VALUES
-(5, 'Đồng hồ trưng bày', 1),
-(6, 'Đồng hồ thời trang', 2),
-(7, 'Đồng hồ thông minh', 3);
+INSERT INTO `tbl_contact` (`id_contact`, `id_user`, `fullname`, `email`, `title`, `message`, `created_at`, `status`) VALUES
+(4, 14, 'Trần Văn Cần', 'cantran12@gmail.com', 'Về dịch vụ', 'Dịch vụ bên bạn quá tuyệt với. Tôi rất thích!', '2024-12-15 16:12:42', 'Đã xem'),
+(5, 14, 'Trần Văn Cần', 'cantran12@gmail.com', 'Về giá cả', 'Giá cả rất hợp lý', '2024-12-15 16:16:38', 'Đã xem'),
+(6, 11, 'Trần Văn Cần', 'can1234@gmail.com', 'Về chất lượng sản phẩm', 'Chất lượng sản phẩm rất tốt tôi rất hài lòng', '2024-12-16 14:07:11', 'Chưa xem');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_giohang`
+-- Cấu trúc bảng cho bảng `tbl_order`
 --
 
-CREATE TABLE `tbl_giohang` (
+CREATE TABLE `tbl_order` (
+  `id_order` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `id_cart` int(11) NOT NULL,
-  `id_khachhang` int(11) NOT NULL,
-  `code_cart` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cart_status` int(11) NOT NULL,
-  `cart_payment` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+  `diachi` varchar(250) NOT NULL,
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `payment` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_giohang`
+-- Đang đổ dữ liệu cho bảng `tbl_order`
 --
 
-INSERT INTO `tbl_giohang` (`id_cart`, `id_khachhang`, `code_cart`, `cart_status`, `cart_payment`) VALUES
-(28, 1, '4095', 0, '0'),
-(31, 1, '1378', 0, '0'),
-(32, 3, '6909', 0, '0'),
-(34, 3, '3504', 0, '0'),
-(35, 3, '4469', 0, '0'),
-(36, 3, '6875', 1, 'tienmat'),
-(37, 3, '3524', 1, 'Chuyển Khoảng'),
-(38, 9, '8326', 1, 'Tiền Mặt');
+INSERT INTO `tbl_order` (`id_order`, `id_user`, `id_cart`, `diachi`, `order_date`, `payment`) VALUES
+(109, 14, 30, 'Ga cầu diễn', '2024-01-17 17:00:00', 'Đã thanh toán'),
+(110, 14, 30, 'Đại học thương mại', '2024-07-17 17:00:00', 'Chưa thanh toán'),
+(111, 14, 30, 'Hà nội', '2024-08-12 17:00:00', 'Đã thanh toán'),
+(119, 12, 34, 'Ga cầu diễn', '2024-07-19 17:00:00', 'Chưa thanh toán'),
+(120, 12, 34, 'Đại học thương mại', '2024-09-19 17:00:00', 'Đã thanh toán'),
+(121, 12, 34, 'Ga cầu diễn', '2024-11-19 17:00:00', 'Chưa thanh toán'),
+(123, 4, 35, 'Ga cầu diễn', '2024-02-23 17:00:00', 'Đã thanh toán'),
+(124, 4, 35, 'Nguyễn Đổng Tri', '2024-03-23 17:00:00', 'Đã thanh toán'),
+(125, 4, 35, 'Hà nội', '2024-08-23 17:00:00', 'Đã thanh toán'),
+(126, 4, 35, 'Hà Nam', '2024-05-23 17:00:00', 'Đã thanh toán'),
+(127, 4, 35, 'Đại học thương mại', '2024-01-23 17:00:00', 'Đã thanh toán'),
+(128, 4, 35, 'Hà nội', '2024-04-23 17:00:00', 'Đã thanh toán'),
+(129, 4, 35, 'Nguyễn Đổng Tri', '2024-03-23 17:00:00', 'Đã thanh toán'),
+(130, 4, 35, 'Ga cầu diễn', '2024-01-23 17:00:00', 'Đã thanh toán'),
+(131, 4, 35, 'Hà Nam', '2024-09-23 17:00:00', 'Đã thanh toán'),
+(132, 4, 35, 'Hà nội', '2024-05-23 17:00:00', 'Đã thanh toán'),
+(133, 4, 35, 'Đại học thương mại', '2024-11-23 17:00:00', 'Đã thanh toán'),
+(134, 4, 35, 'Đại học thương mại', '2024-02-23 17:00:00', 'Đã thanh toán'),
+(135, 4, 35, 'Hà Nam', '2024-02-23 17:00:00', 'Đã thanh toán'),
+(136, 4, 35, 'Ga cầu diễn', '2024-02-23 17:00:00', 'Đã thanh toán'),
+(137, 4, 35, 'Ga cầu diễn', '2024-05-23 17:00:00', 'Đã thanh toán'),
+(138, 4, 35, 'Hà Nam', '2024-08-23 17:00:00', 'Đã thanh toán'),
+(139, 4, 35, 'Đại học thương mại', '2024-10-23 17:00:00', 'Đã thanh toán'),
+(140, 4, 35, 'Hà Nam', '2024-02-23 17:00:00', 'Đã thanh toán'),
+(141, 4, 35, 'Đại học thương mại', '2024-05-23 17:00:00', 'Đã thanh toán'),
+(142, 4, 35, 'Nguyễn Đổng Tri', '2024-05-23 17:00:00', 'Đã thanh toán'),
+(143, 4, 35, 'Hà Nam', '2024-10-23 17:00:00', 'Đã thanh toán'),
+(144, 4, 35, 'Hà nội', '2024-09-23 17:00:00', 'Đã thanh toán'),
+(145, 4, 35, 'Ga cầu diễn', '2024-05-23 17:00:00', 'Đã thanh toán'),
+(146, 4, 35, 'Hà nội', '2024-07-23 17:00:00', 'Đã thanh toán'),
+(147, 4, 35, 'Đại học thương mại', '2024-10-23 17:00:00', 'Đã thanh toán'),
+(148, 4, 35, 'Ga cầu diễn', '2024-05-23 17:00:00', 'Đã thanh toán'),
+(149, 4, 35, 'Hà nội', '2024-07-23 17:00:00', 'Đã thanh toán'),
+(150, 4, 35, 'Đại học thương mại', '2024-06-23 17:00:00', 'Đã thanh toán'),
+(151, 4, 35, 'Nguyễn Đổng Tri', '2024-07-23 17:00:00', 'Đã thanh toán'),
+(152, 4, 35, 'Hà nội', '2024-05-23 17:00:00', 'Đã thanh toán'),
+(153, 4, 35, 'Ga cầu diễn', '2024-03-23 17:00:00', 'Đã thanh toán'),
+(154, 4, 35, 'Hà Nam', '2024-12-23 17:00:00', 'Đã thanh toán'),
+(155, 4, 35, 'Đại học thương mại', '2024-01-23 17:00:00', 'Đã thanh toán'),
+(156, 4, 35, 'Hà Nam', '2024-04-23 17:00:00', 'Đã thanh toán'),
+(157, 4, 35, 'Ga cầu diễn', '2024-05-23 17:00:00', 'Đã thanh toán'),
+(158, 4, 35, 'Đại học thương mại', '2024-03-23 17:00:00', 'Đã thanh toán'),
+(159, 4, 35, 'Hà nội', '2024-10-23 17:00:00', 'Đã thanh toán'),
+(160, 4, 35, 'Đại học thương mại', '2024-03-23 17:00:00', 'Đã thanh toán'),
+(161, 4, 35, 'Hà Nam', '2024-09-23 17:00:00', 'Đã thanh toán'),
+(162, 4, 35, 'Hà Nam', '2024-11-23 17:00:00', 'Đã thanh toán'),
+(163, 4, 35, 'Đại học thương mại', '2024-05-23 17:00:00', 'Đã thanh toán'),
+(164, 4, 35, 'Ga cầu diễn', '2024-03-23 17:00:00', 'Đã thanh toán'),
+(165, 4, 35, 'Ga cầu diễn', '2024-01-23 17:00:00', 'Đã thanh toán'),
+(166, 4, 35, 'Hà nội', '2024-08-23 17:00:00', 'Đã thanh toán'),
+(167, 4, 35, 'Đại học thương mại', '2024-12-23 17:00:00', 'Đã thanh toán'),
+(168, 4, 35, 'Nguyễn Đổng Tri', '2024-01-23 17:00:00', 'Đã thanh toán'),
+(169, 4, 35, 'Ga cầu diễn', '2024-02-23 17:00:00', 'Đã thanh toán'),
+(170, 4, 35, 'Hà nội', '2024-06-23 17:00:00', 'Đã thanh toán'),
+(171, 4, 35, 'Hà Nam', '2024-01-23 17:00:00', 'Đã thanh toán'),
+(172, 4, 35, 'Đại học thương mại', '2024-12-23 17:00:00', 'Đã thanh toán'),
+(173, 4, 35, 'Đại học thương mại', '2024-05-23 17:00:00', 'Đã thanh toán'),
+(174, 4, 35, 'Đại học thương mại', '2024-02-23 17:00:00', 'Đã thanh toán'),
+(175, 4, 35, 'Đại học thương mại', '2024-08-24 17:00:00', 'Đã thanh toán'),
+(176, 4, 35, 'Hà Nam', '2024-08-24 17:00:00', 'Đã thanh toán'),
+(177, 4, 35, 'Hà nội', '2024-03-24 17:00:00', 'Đã thanh toán'),
+(178, 4, 35, 'Ga cầu diễn', '2024-05-24 17:00:00', 'Đã thanh toán'),
+(179, 4, 35, 'Hà Nam', '2024-12-24 17:00:00', 'Đã thanh toán'),
+(180, 4, 35, 'Đại học thương mại', '2024-12-24 17:00:00', 'Đã thanh toán'),
+(181, 4, 35, 'Ga cầu diễn', '2024-10-24 17:00:00', 'Đã thanh toán'),
+(182, 4, 35, 'Ga cầu diễn', '2024-02-24 17:00:00', 'Đã thanh toán'),
+(183, 4, 35, 'Hà nội', '2024-02-24 17:00:00', 'Đã thanh toán'),
+(184, 4, 35, 'Nguyễn Đổng Tri', '2024-04-24 17:00:00', 'Đã thanh toán'),
+(185, 4, 35, 'Hà nội', '2024-12-24 17:00:00', 'Đã thanh toán'),
+(186, 4, 35, 'Hà Nam', '2024-01-24 17:00:00', 'Đã thanh toán'),
+(187, 4, 35, 'Ga cầu diễn', '2024-03-24 17:00:00', 'Đã thanh toán'),
+(188, 4, 35, 'Đại học thương mại', '2024-02-24 17:00:00', 'Đã thanh toán'),
+(189, 4, 35, 'Hà nội', '2024-01-24 17:00:00', 'Đã thanh toán'),
+(190, 4, 35, 'Hà Nam', '2024-10-24 17:00:00', 'Đã thanh toán'),
+(191, 4, 35, 'Ga cầu diễn', '2024-09-24 17:00:00', 'Đã thanh toán'),
+(192, 4, 35, 'Hà nội', '2024-04-24 17:00:00', 'Đã thanh toán'),
+(193, 4, 35, 'Ga cầu diễn', '2024-05-24 17:00:00', 'Đã thanh toán'),
+(194, 4, 35, 'Nguyễn Đổng Tri', '2024-11-24 17:00:00', 'Đã thanh toán'),
+(195, 4, 35, 'Đại học thương mại', '2024-02-24 17:00:00', 'Đã thanh toán'),
+(196, 4, 35, 'Ga cầu diễn', '2024-04-24 17:00:00', 'Đã thanh toán'),
+(197, 4, 35, 'Ga cầu diễn', '2024-11-24 17:00:00', 'Đã thanh toán'),
+(198, 4, 35, 'Hà Nam', '2024-08-24 17:00:00', 'Đã thanh toán'),
+(199, 4, 35, 'Đại học thương mại', '2024-04-24 17:00:00', 'Đã thanh toán'),
+(200, 4, 35, 'Nguyễn Đổng Tri', '2024-09-24 17:00:00', 'Đã thanh toán'),
+(201, 4, 35, 'Ga cầu diễn', '2024-07-24 17:00:00', 'Đã thanh toán'),
+(202, 4, 35, 'Hà nội', '2024-10-24 17:00:00', 'Đã thanh toán'),
+(203, 4, 35, 'Hà Nam', '2024-03-24 17:00:00', 'Đã thanh toán'),
+(204, 4, 35, 'Đại học thương mại', '2024-10-24 17:00:00', 'Đã thanh toán'),
+(205, 4, 35, 'Hà nội', '2024-02-24 17:00:00', 'Đã thanh toán'),
+(206, 4, 35, 'Ga cầu diễn', '2024-05-24 17:00:00', 'Đã thanh toán'),
+(207, 4, 35, 'Hà Nam', '2024-08-24 17:00:00', 'Đã thanh toán'),
+(208, 4, 35, 'Đại học thương mại', '2024-01-24 17:00:00', 'Đã thanh toán'),
+(209, 4, 35, 'Ga cầu diễn', '2024-01-24 17:00:00', 'Đã thanh toán'),
+(210, 4, 35, 'Ga cầu diễn', '2024-04-24 17:00:00', 'Đã thanh toán'),
+(211, 4, 35, 'Hà Nam', '2024-05-24 17:00:00', 'Đã thanh toán'),
+(212, 4, 35, 'Hà nội', '2024-01-24 17:00:00', 'Đã thanh toán'),
+(213, 4, 35, 'Đại học thương mại', '2024-02-24 17:00:00', 'Đã thanh toán'),
+(214, 4, 35, 'Ga cầu diễn', '2024-06-24 17:00:00', 'Đã thanh toán'),
+(215, 4, 35, 'Hà nội', '2024-09-24 17:00:00', 'Đã thanh toán'),
+(216, 4, 35, 'Đại học thương mại', '2024-05-24 17:00:00', 'Đã thanh toán'),
+(217, 4, 35, 'Hà Nam', '2024-07-24 17:00:00', 'Đã thanh toán'),
+(218, 4, 35, 'Hà Nam', '2024-10-24 17:00:00', 'Đã thanh toán'),
+(219, 4, 35, 'Hà Nam', '2024-04-24 17:00:00', 'Đã thanh toán'),
+(220, 4, 35, 'Đại học thương mại', '2024-12-24 17:00:00', 'Đã thanh toán'),
+(221, 4, 35, 'Hà Nam', '2024-12-24 17:00:00', 'Đã thanh toán'),
+(222, 4, 35, 'Hà nội', '2024-11-24 17:00:00', 'Đã thanh toán'),
+(223, 4, 35, 'Ga cầu diễn', '2024-06-24 17:00:00', 'Đã thanh toán'),
+(224, 4, 35, 'Hà nội', '2024-09-24 17:00:00', 'Đã thanh toán'),
+(225, 4, 35, 'Hà Nam', '2024-03-24 17:00:00', 'Đã thanh toán'),
+(226, 4, 35, 'Hà Nam', '2024-12-24 17:00:00', 'Đã thanh toán'),
+(227, 4, 35, 'Hà nội', '2024-01-24 17:00:00', 'Đã thanh toán'),
+(228, 4, 35, 'Hà Nam', '2024-06-24 17:00:00', 'Đã thanh toán'),
+(229, 4, 35, 'Ga cầu diễn', '2024-01-24 17:00:00', 'Đã thanh toán'),
+(230, 4, 35, 'Ga cầu diễn', '2024-11-24 17:00:00', 'Đã thanh toán'),
+(231, 4, 35, 'Ga cầu diễn', '2024-04-24 17:00:00', 'Đã thanh toán'),
+(232, 4, 35, 'Hà Nam', '2024-12-24 17:00:00', 'Đã thanh toán'),
+(233, 4, 35, 'Đại học thương mại', '2024-10-24 17:00:00', 'Đã thanh toán'),
+(234, 4, 35, 'Ga cầu diễn', '2024-12-24 17:00:00', 'Đã thanh toán'),
+(235, 4, 35, 'Hà nội', '2024-08-24 17:00:00', 'Đã thanh toán'),
+(236, 4, 35, 'Hà Nam', '2024-02-24 17:00:00', 'Đã thanh toán'),
+(237, 4, 35, 'Hà nội', '2024-12-24 17:00:00', 'Đã thanh toán'),
+(238, 4, 35, 'Hà Nam', '2024-03-24 17:00:00', 'Đã thanh toán'),
+(239, 4, 35, 'Ga cầu diễn', '2024-12-26 08:43:59', 'Đã thanh toán');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tbl_order_detail`
+--
+
+CREATE TABLE `tbl_order_detail` (
+  `id_order_detail` int(11) NOT NULL,
+  `id_order` int(11) NOT NULL,
+  `id_sanpham` int(11) NOT NULL,
+  `soluong` int(11) DEFAULT NULL,
+  `price` double NOT NULL,
+  `total` double GENERATED ALWAYS AS (`soluong` * `price`) STORED
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_order_detail`
+--
+
+INSERT INTO `tbl_order_detail` (`id_order_detail`, `id_order`, `id_sanpham`, `soluong`, `price`) VALUES
+(32, 109, 1, 2, 220000),
+(33, 110, 2, 2, 280000),
+(34, 111, 3, 3, 250000),
+(42, 119, 1, 2, 220000),
+(43, 120, 1, 1, 220000),
+(44, 121, 1, 2, 220000),
+(46, 123, 3, 2, 250000),
+(47, 124, 1, 3, 220000),
+(48, 125, 2, 2, 280000),
+(49, 126, 1, 3, 220000),
+(50, 127, 2, 3, 280000),
+(51, 128, 6, 3, 250000),
+(52, 129, 3, 3, 250000),
+(53, 130, 1, 3, 220000),
+(54, 131, 3, 2, 250000),
+(55, 132, 10, 4, 210000),
+(56, 133, 2, 1, 280000),
+(57, 134, 4, 3, 190000),
+(58, 135, 2, 2, 280000),
+(59, 136, 1, 2, 220000),
+(60, 137, 3, 2, 250000),
+(61, 138, 5, 3, 290000),
+(62, 139, 2, 2, 280000),
+(63, 140, 1, 3, 220000),
+(64, 141, 2, 3, 280000),
+(65, 142, 3, 3, 250000),
+(66, 143, 1, 3, 220000),
+(67, 144, 2, 2, 280000),
+(68, 145, 1, 3, 220000),
+(69, 146, 3, 4, 250000),
+(70, 147, 1, 2, 220000),
+(71, 148, 1, 3, 220000),
+(72, 149, 2, 2, 280000),
+(73, 150, 1, 1, 220000),
+(74, 151, 2, 1, 280000),
+(75, 152, 2, 3, 280000),
+(76, 153, 3, 3, 250000),
+(77, 154, 1, 1, 220000),
+(78, 155, 2, 2, 280000),
+(79, 156, 1, 3, 220000),
+(80, 157, 3, 2, 250000),
+(81, 158, 3, 3, 250000),
+(82, 159, 1, 2, 220000),
+(83, 160, 2, 4, 280000),
+(84, 161, 1, 2, 220000),
+(85, 162, 5, 3, 290000),
+(86, 163, 1, 2, 220000),
+(87, 164, 2, 2, 280000),
+(88, 165, 1, 3, 220000),
+(89, 166, 1, 2, 220000),
+(90, 167, 4, 3, 190000),
+(91, 168, 6, 3, 250000),
+(92, 169, 1, 4, 220000),
+(93, 170, 1, 2, 220000),
+(94, 171, 2, 1, 280000),
+(95, 172, 2, 3, 280000),
+(96, 173, 1, 3, 220000),
+(97, 174, 2, 2, 280000),
+(98, 175, 1, 2, 220000),
+(99, 176, 2, 2, 280000),
+(100, 177, 1, 2, 220000),
+(101, 178, 1, 2, 220000),
+(102, 179, 1, 1, 220000),
+(103, 180, 2, 3, 280000),
+(104, 181, 1, 2, 220000),
+(105, 182, 3, 3, 250000),
+(106, 183, 1, 3, 220000),
+(107, 184, 2, 2, 280000),
+(108, 185, 3, 2, 250000),
+(109, 186, 1, 3, 220000),
+(110, 187, 1, 2, 220000),
+(111, 188, 3, 3, 250000),
+(112, 189, 1, 4, 220000),
+(113, 190, 2, 3, 280000),
+(114, 191, 1, 2, 220000),
+(115, 192, 2, 4, 280000),
+(116, 193, 1, 3, 220000),
+(117, 194, 6, 2, 250000),
+(118, 195, 1, 2, 220000),
+(119, 196, 2, 3, 280000),
+(120, 197, 1, 1, 220000),
+(121, 198, 2, 2, 280000),
+(122, 199, 1, 3, 220000),
+(123, 200, 2, 2, 280000),
+(124, 201, 1, 1, 220000),
+(125, 202, 3, 4, 250000),
+(126, 203, 1, 3, 220000),
+(127, 204, 2, 3, 280000),
+(128, 205, 1, 2, 220000),
+(129, 206, 5, 3, 290000),
+(130, 207, 4, 4, 190000),
+(131, 208, 6, 3, 250000),
+(132, 209, 10, 3, 210000),
+(133, 210, 1, 1, 220000),
+(134, 211, 2, 2, 280000),
+(135, 212, 1, 2, 220000),
+(136, 213, 5, 4, 290000),
+(137, 214, 2, 3, 280000),
+(138, 215, 4, 2, 190000),
+(139, 216, 2, 2, 280000),
+(140, 217, 1, 2, 220000),
+(141, 218, 4, 3, 190000),
+(142, 219, 3, 3, 250000),
+(143, 220, 5, 3, 290000),
+(144, 221, 1, 2, 220000),
+(145, 222, 2, 1, 280000),
+(146, 223, 2, 1, 280000),
+(147, 224, 4, 2, 190000),
+(148, 225, 2, 3, 280000),
+(149, 226, 1, 2, 220000),
+(150, 227, 3, 2, 250000),
+(151, 228, 1, 2, 220000),
+(152, 229, 2, 2, 280000),
+(153, 230, 1, 3, 220000),
+(154, 231, 1, 2, 220000),
+(155, 232, 5, 3, 290000),
+(156, 233, 4, 2, 190000),
+(157, 234, 1, 4, 220000),
+(158, 235, 2, 2, 280000),
+(159, 236, 6, 3, 250000),
+(160, 237, 2, 2, 280000),
+(161, 238, 1, 1, 220000),
+(162, 239, 1, 2, 220000);
 
 -- --------------------------------------------------------
 
@@ -152,70 +576,171 @@ INSERT INTO `tbl_giohang` (`id_cart`, `id_khachhang`, `code_cart`, `cart_status`
 
 CREATE TABLE `tbl_sanpham` (
   `id_sanpham` int(11) NOT NULL,
-  `tensanpham` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `masanpham` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `giasanpham` float NOT NULL,
+  `masp` varchar(15) NOT NULL,
+  `tensp` varchar(250) NOT NULL,
+  `price` double NOT NULL,
+  `xuatxu` varchar(100) NOT NULL,
+  `dangdouong` varchar(100) NOT NULL,
+  `loaithucpham` varchar(100) NOT NULL,
+  `hansudung` varchar(100) NOT NULL,
   `soluong` int(11) NOT NULL,
-  `hinhanh` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tomtat` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `noidung` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_danhmuc` int(11) NOT NULL,
-  `trangthai` int(11) NOT NULL
+  `hinhanh` varchar(100) NOT NULL,
+  `mota` text DEFAULT NULL,
+  `id_category` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_sanpham`
 --
 
-INSERT INTO `tbl_sanpham` (`id_sanpham`, `tensanpham`, `masanpham`, `giasanpham`, `soluong`, `hinhanh`, `tomtat`, `noidung`, `id_danhmuc`, `trangthai`) VALUES
-(5, 'Đồng hồ Thụy Sĩ', 'MHAQUA', 1000000, 2, 'mvw-ml005-02-nam-2-org.jpg', '', '', 5, 1),
-(6, 'CASIO 25.2 mm Nữ LTP-1130A-7BRDF', 'MHFBK', 1200000, 1, 'beu-pt1-den-thumb-1-1-600x600.jpg', 'Thiết kế của đồng hồ Sheen luôn bắt mắt người đeo bởi mặt đồng hồ đa dạng và tinh tế. Những mẫu đồng hồ dành riêng cho cô nàng có phong cách cá tính và ưa thích sự mới lạ. Điểm chung của d', '', 5, 0),
-(7, 'Đồng hồ MVW 40 mm Nam ML005-02', 'MHOKU', 1500000, 1, 'masstel-smart-hero-4g-xanh-duong-2-1-org.jpg', '', '', 5, 1),
-(8, 'Đồng hồ Masstel Smart Hero 4G', 'MHAQUACB', 500000, 12, 'befit-b3-vang-1.jpg', 'Sản phẩm đồng hồ mang thương hiệu MVW với nhiều mẫu mã năng động, trẻ trung nhưng không kém phần tinh tế và sang trọng, phù hợp với tất cả mọi người hoạt động ở nhiều lĩnh vực từ dân văn ph', '', 6, 0),
-(10, 'Đồng hồ cơ Rolex 3X', 'MTBHiV', 3000000, 3, 'mvw-ml005-02-nam-2-org.jpg', 'Sản phẩm đồng hồ mang thương hiệu MVW với nhiều mẫu mã năng động, trẻ trung nhưng không kém phần tinh tế và sang trọng, phù hợp với tất cả mọi người hoạt động ở nhiều lĩnh vực từ dân văn ph', '', 7, 0),
-(11, 'Đồng hồ thể thao A531', 'GDUGN0', 3000000, 1, 'masstel-smart-hero-4g-xanh-duong-2-1-org.jpg', 'Sản phẩm đồng hồ mang thương hiệu MVW với nhiều mẫu mã năng động, trẻ trung nhưng không kém phần tinh tế và sang trọng, phù hợp với tất cả mọi người hoạt động ở nhiều lĩnh vực từ dân văn ph', '', 7, 0),
-(12, 'Đồng hồ G-Shock Z123', 'MTBJG', 3500000, 1, 'g-shock-gba-900-1a6dr-nam-1.jpg', 'Sản phẩm đồng hồ mang thương hiệu MVW với nhiều mẫu mã năng động, trẻ trung nhưng không kém phần tinh tế và sang trọng, phù hợp với tất cả mọi người hoạt động ở nhiều lĩnh vực từ dân văn ph', '', 7, 0),
-(13, 'Đồng hồ SamSung A7', 'MHCBKOMI', 700000, 2, 'beu-active-1-2-1.jpg', 'Sản phẩm đồng hồ mang thương hiệu MVW với nhiều mẫu mã năng động, trẻ trung nhưng không kém phần tinh tế và sang trọng, phù hợp với tất cả mọi người hoạt động ở nhiều lĩnh vực từ dân văn ph', '', 6, 1),
-(14, 'Đồng hồ Apple Watch 5.0 Seris', 'MHGSBARA', 1700000, 2, 'beu-b3-den-1.jpg', 'Sản phẩm đồng hồ mang thương hiệu MVW với nhiều mẫu mã năng động, trẻ trung nhưng không kém phần tinh tế và sang trọng, phù hợp với tất cả mọi người hoạt động ở nhiều lĩnh vực từ dân văn ph', '', 5, 1),
-(15, 'Đồng hồ thông minh Smart Watch 2', 'MHSAWH', 1600000, 1, 'beu-pt1-den-thumb-1-1-600x600.jpg', 'Sản phẩm đồng hồ mang thương hiệu MVW với nhiều mẫu mã năng động, trẻ trung nhưng không kém phần tinh tế và sang trọng, phù hợp với tất cả mọi người hoạt động ở nhiều lĩnh vực từ dân văn ph', '', 5, 1),
-(16, 'Đồng hồ Rolex Thụy Sĩ', 'MHCBMATSURI', 15000000, 1, 'dong-ho-nam-citizen-bi5051-51a-trang-ga-1-org.jpg', 'Sản phẩm đồng hồ mang thương hiệu MVW với nhiều mẫu mã năng động, trẻ trung không kém phần tinh tế và sang trọng, phù hợp với tất cả mọi người hoạt động ở nhiều lĩnh vực từ dân văn phòng', '', 6, 0),
-(17, 'Đồng hồ thông minh Smart Watch 2', 'asdfdf', 13990000, 12, 'befit-b3-vang-1.jpg', 'Sản phẩm đồng hồ mang thương hiệu MVW với nhiều mẫu mã năng động, trẻ trung không kém phần tinh tế và sang trọng, phù hợp với tất cả mọi người hoạt động ở nhiều lĩnh vực', '', 7, 0),
-(18, 'Đồng hồ G-Shock Z123', 'fsddf', 2990000, 5, 'beu-pt1-den-thumb-1-1-600x600.jpg', 'Sản phẩm đồng hồ mang thương hiệu MVW với nhiều mẫu mã năng động, trẻ trung không kém phần tinh tế và sang trọng, phù hợp với tất cả mọi người hoạt động ở nhiều lĩnh vực', '', 7, 0),
-(19, 'Đồng hồ thể thao A531', 'vcf', 19990000, 3, 'mvw-ml005-02-nam-2-org.jpg', 'Sản phẩm đồng hồ mang thương hiệu MVW với nhiều mẫu mã năng động, trẻ trung không kém phần tinh tế và sang trọng, phù hợp với tất cả mọi người hoạt động ở nhiều lĩnh vực', '', 6, 0),
-(20, 'Đồng hồ SamSung A7', 'vcfs', 5999000, 6, 'masstel-smart-hero-4g-xanh-duong-2-1-org.jpg', 'Sản phẩm đồng hồ mang thương hiệu MVW với nhiều mẫu mã năng động, trẻ trung không kém phần tinh tế và sang trọng, phù hợp với tất cả mọi người hoạt động ở nhiều lĩnh vực', '', 6, 0);
+INSERT INTO `tbl_sanpham` (`id_sanpham`, `masp`, `tensp`, `price`, `xuatxu`, `dangdouong`, `loaithucpham`, `hansudung`, `soluong`, `hinhanh`, `mota`, `id_category`) VALUES
+(1, 'SP1', 'Cà Phê Dak Lak', 220000, 'Việt Nam', 'Cà phê xay', 'Truyền thống', '12 tháng', 10, 'product-1.png', '100% cà phê rang mộc nguyên chất\nPhù hợp với công thức pha máy của người Ý bao gồm các món uống trên nền Espresso. Có thể sử dụng để ngâm cà phê Cold Brew cho ra hương vị trọn vẹn và thanh mát.\nKhối lượng: 250Gr\nĐóng gói: Túi zip có van 1 chiều – giúp bảo quản cà phê tốt hơn, tránh bị ôi thiu\nHạn sử dụng: 12 tháng kể từ ngày sản xuất\nXuất xứ: Việt Nam\n', 1),
+(2, 'SP2', 'Cà Phê Cherry', 280000, 'Việt Nam', 'Cà phê xay', 'Truyền thống', '12 tháng', 10, 'product-2.png', '100% cà phê rang mộc nguyên chất\nPhù hợp với công thức pha máy của người Ý bao gồm các món uống trên nền Espresso. Có thể sử dụng để ngâm cà phê Cold Brew cho ra hương vị trọn vẹn và thanh mát.\nKhối lượng: 250Gr\nĐóng gói: Túi zip có van 1 chiều – giúp bảo quản cà phê tốt hơn, tránh bị ôi thiu\nHạn sử dụng: 12 tháng kể từ ngày sản xuất\nXuất xứ: Việt Nam', 1),
+(3, 'SP3', 'Cà Phê Gia Lai', 250000, 'Việt Nam', 'Cà phê xay', 'Truyền thống', '12 tháng', 10, 'product-3.png', '100% cà phê rang mộc nguyên chất\nPhù hợp với công thức pha máy của người Ý bao gồm các món uống trên nền Espresso. Có thể sử dụng để ngâm cà phê Cold Brew cho ra hương vị trọn vẹn và thanh mát.\nKhối lượng: 250Gr\nĐóng gói: Túi zip có van 1 chiều – giúp bảo quản cà phê tốt hơn, tránh bị ôi thiu\nHạn sử dụng: 12 tháng kể từ ngày sản xuất\nXuất xứ: Việt Nam', 1),
+(4, 'SP4', 'Cà Phê Rang Mộc Robusta', 190000, 'Việt Nam', 'Cà phê xay', 'Hiện đại', '12 tháng', 5, 'product-4.png', '100% cafe Robusta và Arabica tươi, chọn lọc để tạo nên một loại cà phê cân bằng giữa sự mạnh mẽ của Robusta và hương vị đa dạng của Arabica.\nPhù hợp với công thức pha máy của người Ý bao gồm các món uống trên nền Espresso. Có thể sử dụng để ngâm cà phê Cold Brew cho ra hương vị trọn vẹn và thanh mát.\nKhối lượng: 250Gr\nHạn sử dụng: 12 tháng kể từ ngày sản xuất\nXuất xứ: Việt Nam', 1),
+(5, 'SP5', 'Cà Phê Arabica Măng Đen', 290000, 'Việt Nam', 'Cà phê xay', 'Espresso', '12 tháng', 10, 'product-5.png', 'Nguồn gốc: Cao nguyên Măng Đen, Kon Tum\nQuy trình rang xay: Thủ công, đảm bảo giữ trọn hương vị tự nhiên\nĐặc điểm hạt: Hạt cà phê Arabica Măng Đen có kích thước lớn, màu nâu sáng, hương thơm nồng nàn\nHương vị:\nCà phê Arabica Măng Đen mang đến hương vị tinh tế với vị chua nhẹ đặc trưng, hậu vị ngọt dịu và hương hoa trái cây phong phú. Được rang xay tỉ mỉ, từng ngụm cà phê sẽ đưa bạn vào một hành trình thưởng thức đích thực.\nLợi ích:\nChất lượng cao: Được trồng và thu hoạch theo phương pháp truyền thống, không sử dụng hóa chất\nSức khỏe: Chứa nhiều chất chống oxy hóa, tốt cho sức khỏe\nThưởng thức: Phù hợp cho nhiều phương pháp pha chế như pha máy, pha phin, cold brew\nCách pha chế đề nghị:\nPha phin: Sử dụng 20-25 gram cà phê xay thô, đổ nước nóng và chờ khoảng 5-7 phút để cà phê nhỏ giọt. Thêm sữa đặc hoặc đường tùy khẩu vị.\nPha máy: Xay mịn cà phê, sử dụng 18-20 gram cho mỗi lần pha. Chiết xuất trong khoảng 25-30 giây để có được hương vị tốt nhất.\nCold Brew: Dùng tỷ lệ 1:8 (cà phê: nước), ngâm trong nước lạnh khoảng 12-24 giờ, sau đó lọc bỏ bã cà phê và thưởng thức.', 1),
+(6, 'SP6', 'Cà Phê Mix Robusta, Arabica', 250000, 'Việt Nam', 'Cà phê xay', 'Truyền thống', '12 tháng', 10, 'product-6.png', '100% cà phê rang mộc nguyên chất\nPhù hợp với công thức pha máy của người Ý bao gồm các món uống trên nền Espresso. Có thể sử dụng để ngâm cà phê Cold Brew cho ra hương vị trọn vẹn và thanh mát.\nKhối lượng: 250Gr\nĐóng gói: Túi zip có van 1 chiều – giúp bảo quản cà phê tốt hơn, tránh bị ôi thiu\nHạn sử dụng: 12 tháng kể từ ngày sản xuất\nXuất xứ: Việt Nam', 1),
+(10, 'SP10', 'Cà phê Tây Bắc', 210000, 'Việt Nam', 'Cà phê xay', 'Hiện đại', '12 tháng', 10, 'product-2.png', '100% cà phê nguyên chất', 1),
+(11, 'SP11', 'Cà phê Tây Nguyên', 250000, 'Việt Nam', 'Cà phê xay', 'Truyền thống', '12 tháng', 10, 'product-4.png', '100% cà phê sản xuất và đóng gói ở Tây Nguyên', 1),
+(12, 'ME2', 'Caramel macchiato', 69000, '', '', '', '', 10, 'menu-2.png', NULL, 2),
+(13, 'ME3', 'Cà phê capuchino', 65000, '', '', '', '', 10, 'menu-3.png', NULL, 2),
+(14, 'ME4', 'Cà phê Macchiato', 69000, '', '', '', '', 10, 'menu-4.png', NULL, 2),
+(15, 'ME5', 'Cà phê latte', 65000, '', '', '', '', 10, 'menu-5.png', NULL, 2),
+(16, 'ME6', 'Mocha macchiato', 59000, '', '', '', '', 10, 'menu-6.png', NULL, 2),
+(17, 'ME7', 'Cà phê Espresso', 45000, '', '', '', '', 10, 'menu-2.png', NULL, 2),
+(18, 'ME8', 'Matcha latte', 55000, '', '', '', '', 10, 'menu-1.png', NULL, 2),
+(19, 'ME1', 'Caramel latte', 45000, '', '', '', '', 10, 'menu-1.png', NULL, 2);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_shipping`
+-- Cấu trúc bảng cho bảng `tbl_user`
 --
 
-
-CREATE TABLE `tbl_shipping` (
-  `id_shipping` int(11) NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `adress` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `note` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_dangky` int(11) NOT NULL
+CREATE TABLE `tbl_user` (
+  `id_user` int(11) NOT NULL,
+  `fullname` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `tbl_user`
+--
 
-INSERT INTO `tbl_shipping` (`id_shipping`, `name`, `phone`, `adress`, `note`, `id_dangky`) VALUES
-(1, '', '', '', '', 3),
-(2, '', '', '', '', 3),
-(3, 'nguyễn Minh Tâm', '05658421', '23/C', '', 1),
-(4, 'Pham Anh Vinh', '', '', '', 3),
-(5, 'Pham Anh Vinh', '', '', '', 3);
-
-
-create table `tbl_blog`(
-	`id_blog` int(11) NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `author` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date` date NOT NULL,
-  `content` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `tbl_user` (`id_user`, `fullname`, `username`, `email`, `password`, `phone`, `create_at`) VALUES
+(4, 'Trần Khắc Nam', 'nam123', 'nam123@gmail.com', '54e193277215c92570bc9659bd48ff40', '0969657546', '2024-11-13 07:04:51'),
+(6, 'Trần Lương', 'luongtran12', 'luongtran12@gmail.com', '81e1f2b0ba0e9ebd732093f5a7d62336', '0938765433', '2024-12-21 07:04:51'),
+(8, 'Kang Minh', 'kangminh12', 'kangminh12@gmail.com', 'c35875566e0aea896ffee86a9875a5c7', '0324545326', '2024-11-15 07:04:51'),
+(11, 'Trần Văn Cần', 'can1234', 'can1234@gmail.com', '0d0d27cbe905c6bb61c6c606c9ef943a', '0938765433', '2024-11-16 07:04:51'),
+(12, 'Kang Minh Đức', 'minhduc123', 'minhduc123@gmail.com', '1ab7f27f7fd711280bfd83ea5c8d7736', '0324324235', '2024-12-21 07:04:51'),
+(14, 'Trần Văn Cần', 'cantran12', 'cantran12@gmail.com', '0bde1c919fca18bc6104caeb15fc3174', '0974468253', '2024-12-21 07:04:51'),
+(15, 'Kang Minh', 'minh12', 'kangminh123@gmail.com', '36c3a03a0b15f41b71f45a7d2eefcd1a', '0324545326', '2024-12-24 12:34:02'),
+(16, 'Kang Minh Đức', 'minh123', 'kangminh12345@gmail.com', 'c35875566e0aea896ffee86a9875a5c7', '0324545326', '2024-12-24 12:35:41'),
+(17, 'Trần Nam', 'trannam12', 'nam12@gmail.com', 'd8ca6fa00edb2a10cffa9476f7e29d09', '0964537282', '2024-12-24 12:39:26'),
+(18, 'Trần Nam', 'trannam1', 'nam1@gmail.com', 'dbe1835a33948859603ef7efa2d417bc', '0964537281', '2024-12-24 12:44:45'),
+(19, 'Nguyễn Văn A', 'nguyenvana1', 'vana1@gmail.com', '6cf4888397fad35f4ad9578a00d9147c', '0964537282', '2024-12-24 12:44:45'),
+(20, 'Lê Thị B', 'lethib2', 'thib2@gmail.com', 'bcbe7fe703c04d61830fdfdc405bff5a', '0964537283', '2024-12-24 12:44:45'),
+(21, 'Phạm Minh C', 'phamminhc3', 'minhc3@gmail.com', '575b3b5392b92a141e87dcd9b0416508', '0964537284', '2024-12-24 12:44:45'),
+(22, 'Hoàng Anh D', 'hoanganhd4', 'anhd4@gmail.com', '840498cf017d7c838151337cc9f3595b', '0964537285', '2024-12-24 12:44:45'),
+(23, 'Vũ Thanh E', 'vuthanhe5', 'thanhe5@gmail.com', '8d48fd3acf6c7d317a99f101757aaebc', '0964537286', '2024-12-24 12:44:45'),
+(24, 'Đỗ Hồng F', 'dohongf6', 'hongf6@gmail.com', '1e686aead897dacae53ac1d0db698412', '0964537287', '2024-12-24 12:44:45'),
+(25, 'Bùi Văn G', 'buivang7', 'vang7@gmail.com', '8b38b17a38212a16677beb1887599cae', '0964537288', '2024-12-24 12:44:45'),
+(26, 'Ngô Thị H', 'ngothih8', 'thih8@gmail.com', '27dec91cec835d70fdf79a7895f73f3a', '0964537289', '2024-12-24 12:44:45'),
+(27, 'Trần Thị I', 'tranthii9', 'thii9@gmail.com', '55f106e5c398b025c16e74a9da863934', '0964537290', '2024-12-24 12:44:45'),
+(28, 'Lê Văn J', 'levanj10', 'vanj10@gmail.com', '6c31bfd79c5ee1beca597b09106ecb8e', '0964537291', '2024-12-24 12:44:45'),
+(29, 'Phạm Thị K', 'phamthik11', 'thik11@gmail.com', '7d4a65ac714cdbece996321ac8a1f60b', '0964537292', '2024-12-24 12:44:45'),
+(30, 'Nguyễn Văn L', 'nguyenvanl12', 'vanl12@gmail.com', '33e69c2033aa0215f005f213a1c095e4', '0964537293', '2024-12-24 12:44:45'),
+(31, 'Lê Minh M', 'leminhm13', 'minhm13@gmail.com', '4f85fdec46e57c1051c0d8aa04c6eba3', '0964537294', '2024-12-24 12:44:45'),
+(32, 'Trần Văn N', 'tranvann14', 'vann14@gmail.com', '7f49cfce7f1ac84371d37ce8be7a8fbd', '0964537295', '2024-12-24 12:44:45'),
+(33, 'Nguyễn Anh O', 'nguyenanho15', 'anho15@gmail.com', '75494ab83fad98cb273920852df6b62e', '0964537296', '2024-12-24 12:44:45'),
+(34, 'Lê Thị P', 'lethip16', 'thip16@gmail.com', '0edf0a470ee258f3955da1354bc47c96', '0964537297', '2024-12-24 12:44:45'),
+(35, 'Phạm Hồng Q', 'phamhongq17', 'hongq17@gmail.com', '02d235c307b990611b4cb2823d17358f', '0964537298', '2024-12-24 12:44:45'),
+(36, 'Trần Văn R', 'tranvanr18', 'vanr18@gmail.com', '878f5d326317c1c7d801e6267ccf9acf', '0964537299', '2024-12-24 12:44:45'),
+(37, 'Lê Thị S', 'lethis19', 'this19@gmail.com', '34dbd7c03f1e031a14ace53533509610', '0964537300', '2024-12-24 12:44:45'),
+(38, 'Trần Nam', 'trannam01', 'nam01@gmail.com', '85ccc651e3fefc51affde1f9d2ce6e32', '0964537201', '2024-12-24 12:44:59'),
+(39, 'Nguyễn Hoa', 'nguyenhoa02', 'hoa02@gmail.com', '4ca2780039c94b655c30c659fc441699', '0964537202', '2024-12-24 12:44:59'),
+(40, 'Lê Bình', 'lebinh03', 'binh03@gmail.com', '6074fdb6375cdf399e112ef5302c5ceb', '0964537203', '2024-12-24 12:44:59'),
+(41, 'Phạm Hải', 'phamhai04', 'hai04@gmail.com', '454149e94204e6ce8e9b5515345c0d8c', '0964537204', '2024-12-24 12:44:59'),
+(42, 'Hoàng Anh', 'hoanganh05', 'anh05@gmail.com', 'f3fb97406d6fb92cbc3f9fe1a0c7a59e', '0964537205', '2024-12-24 12:44:59'),
+(43, 'Trần Minh', 'tranminh06', 'minh06@gmail.com', 'd0d3ed270ee4c63980de7a4e522ff5e3', '0964537206', '2024-12-24 12:44:59'),
+(44, 'Ngô Thanh', 'ngothanh07', 'thanh07@gmail.com', 'a79c1466ff3dcb7e0c0368bcaf507a30', '0964537207', '2024-12-24 12:44:59'),
+(45, 'Đặng Quang', 'dangquang08', 'quang08@gmail.com', 'b390e026be669fcc484bae0ba5c5f491', '0964537208', '2024-12-24 12:44:59'),
+(46, 'Lê Văn', 'levan09', 'van09@gmail.com', '721c16d1c5b3fc38e0d82e864d155660', '0964537209', '2024-12-24 12:44:59'),
+(47, 'Trần Thu', 'tranthu10', 'thu10@gmail.com', '40cbdc32daca84cc02c2efe796fac6d0', '0964537210', '2024-12-24 12:44:59'),
+(48, 'Nguyễn Sơn', 'nguyenson11', 'son11@gmail.com', '380c2e2baf81997baa08af9bc36e9a1e', '0964537211', '2024-12-24 12:44:59'),
+(49, 'Lê Hồng', 'lehue12', 'hue12@gmail.com', '5b406059db9ee2b4f01b961c29a482cc', '0964537212', '2024-12-24 12:44:59'),
+(50, 'Hoàng Nam', 'hoangnam13', 'nam13@gmail.com', 'f4baada1f3f3e572fd65200344253174', '0964537213', '2024-12-24 12:44:59'),
+(51, 'Phạm Hà', 'phamha14', 'ha14@gmail.com', '5d418a189defbf46829e5fc42868e043', '0964537214', '2024-12-24 12:44:59'),
+(52, 'Ngô Anh', 'ngoanh15', 'anh15@gmail.com', 'ad03f5390d47440f37b6e786d3065def', '0964537215', '2024-12-24 12:44:59'),
+(53, 'Đặng Linh', 'danglinh16', 'linh16@gmail.com', '254c64ed08b70a6aaec549bd0589772e', '0964537216', '2024-12-24 12:44:59'),
+(54, 'Trần Văn', 'tranvan17', 'van17@gmail.com', '449e00bdfd2f9a04a8f7afd367d249ce', '0964537217', '2024-12-24 12:44:59'),
+(55, 'Nguyễn Huy', 'nguyenhuy18', 'huy18@gmail.com', '21472cef96965029af36a88baf2d7bbc', '0964537218', '2024-12-24 12:44:59'),
+(56, 'Lê Hải', 'lehai19', 'hai19@gmail.com', '3f74b0fe32cf50f428d7bef90cdb6197', '0964537219', '2024-12-24 12:44:59'),
+(57, 'Phạm Văn', 'phamvan20', 'van20@gmail.com', '8c50e668872d9bb73c2a80bde052905b', '0964537220', '2024-12-24 12:44:59'),
+(58, 'Nguyễn Thảo', 'nguyenthao21', 'thao21@gmail.com', '31b72ce57f9676795211f749ac6a6093', '0964537221', '2024-12-24 12:46:23'),
+(59, 'Lê Quý', 'lequy22', 'quy22@gmail.com', 'c6e54fd6172df96ef5686592bca684ce', '0964537222', '2024-12-24 12:46:23'),
+(60, 'Phạm Bình', 'phambinh23', 'binh23@gmail.com', 'fca09c820fbe5f56543b3d6695b80c97', '0964537223', '2024-12-24 12:46:23'),
+(61, 'Hoàng Dũng', 'hoangdung24', 'dung24@gmail.com', '737c3afebdb8dd6930bf4c5177c96d1e', '0964537224', '2024-12-24 12:46:23'),
+(62, 'Trần Vinh', 'tranvinh25', 'vinh25@gmail.com', '0dc38c25ae32d3bbe759f8d1796e68c7', '0964537225', '2024-12-24 12:46:23'),
+(63, 'Nguyễn Giang', 'nguyengiang26', 'giang26@gmail.com', '6cf4980262b809415e0bcfd31ace2682', '0964537226', '2024-12-24 12:46:23'),
+(64, 'Đặng Hà', 'dangha27', 'ha27@gmail.com', '5af98930505564aa143f3c41f7c6c946', '0964537227', '2024-12-24 12:46:23'),
+(65, 'Lê Khánh', 'lekhanh28', 'khanh28@gmail.com', '725bd76edb087357c8b33c5e90b28f7d', '0964537228', '2024-12-24 12:46:23'),
+(66, 'Phạm Anh', 'phamanh29', 'anh29@gmail.com', '36d4a2f9e04de4ef99b2bb34315bf392', '0964537229', '2024-12-24 12:46:23'),
+(67, 'Ngô Quang', 'ngoquang30', 'quang30@gmail.com', 'bba129237ec66c769d9c265eccedb1cc', '0964537230', '2024-12-24 12:46:23'),
+(68, 'Lê Thanh', 'lethanh31', 'thanh31@gmail.com', 'e3b66815e8896cef190077a86c456174', '0964537231', '2024-12-24 12:46:23'),
+(69, 'Nguyễn Khoa', 'nguyenkhoa32', 'khoa32@gmail.com', '26d13448ede3e7a6f9d555c12f8ae181', '0964537232', '2024-12-24 12:46:23'),
+(70, 'Đặng Hòa', 'danghoa33', 'hoa33@gmail.com', '53c231ba81f7c829782f5b7c7acda102', '0964537233', '2024-12-24 12:46:23'),
+(71, 'Lê Hưng', 'lehung34', 'hung34@gmail.com', 'd2643132a4cd248f6bdcd7bd1eef15aa', '0964537234', '2024-12-24 12:46:23'),
+(72, 'Nguyễn Đức', 'nguyenduc35', 'duc35@gmail.com', 'b803a6fc2d302402e9bb9292db96b214', '0964537235', '2024-12-24 12:46:23'),
+(73, 'Phạm Lộc', 'phamloc36', 'loc36@gmail.com', '9a0a1676ec0971b49f8815586e8df95f', '0964537236', '2024-12-24 12:46:23'),
+(74, 'Trần Hoa', 'tranhoa37', 'hoa37@gmail.com', '35a31d020f60fab1c42f52d3cd8c3474', '0964537237', '2024-12-24 12:46:23'),
+(75, 'Nguyễn Tâm', 'nguyentam38', 'tam38@gmail.com', '55f9c6613f5a2aab21a4381ae134d02e', '0964537238', '2024-12-24 12:46:23'),
+(76, 'Đặng Minh', 'dangminh39', 'minh39@gmail.com', '30136a77b58ab8ff30d765031c93354e', '0964537239', '2024-12-24 12:46:23'),
+(77, 'Phạm Hiền', 'phamhoang40', 'hoang40@gmail.com', '5e30860bc84739580045456cc91edd99', '0964537240', '2024-12-24 12:46:23'),
+(78, 'Lê Duyên', 'leduyen41', 'duyen41@gmail.com', 'c21c4dde237fcca9c63672d880c4e217', '0964537241', '2024-12-24 12:46:23'),
+(79, 'Ngô Lâm', 'ngolam42', 'lam42@gmail.com', 'c3fee19b96345eb25ebbffaab7da9c74', '0964537242', '2024-12-24 12:46:23'),
+(80, 'Đặng Sơn', 'dangson43', 'son43@gmail.com', 'f17c3b654f7eaf7856807eae59f1cb40', '0964537243', '2024-12-24 12:46:23'),
+(81, 'Nguyễn Xuân', 'nguyenxuan44', 'xuan44@gmail.com', '53984e0bffd48c71e497a6baf3011fc3', '0964537244', '2024-12-24 12:46:23'),
+(82, 'Phạm Thành', 'phamthanh45', 'thanh45@gmail.com', '9447e807dcf53222ac18cffc7d34ba0c', '0964537245', '2024-12-24 12:46:23'),
+(83, 'Lê Hạnh', 'lehanh46', 'hanh46@gmail.com', '7a6f6d317ec07f45742f6dc1e6825f20', '0964537246', '2024-12-24 12:46:23'),
+(84, 'Hoàng Hà', 'hoangha47', 'ha47@gmail.com', 'd09fc547f2d9a90c55789b53ca343c85', '0964537247', '2024-12-24 12:46:23'),
+(85, 'Trần Kiên', 'trankien48', 'kien48@gmail.com', 'e498d510a92908c8506830eff268c9df', '0964537248', '2024-12-24 12:46:23'),
+(86, 'Ngô Vũ', 'ngovu49', 'vu49@gmail.com', '3c7757bae8d63c3ef03b2b3457eda3f8', '0964537249', '2024-12-24 12:46:23'),
+(87, 'Lê Tân', 'letan50', 'tan50@gmail.com', 'f79960320d28315980d34edece835d1d', '0964537250', '2024-12-24 12:46:23'),
+(88, 'Nguyễn Như', 'nguyennhu51', 'nhu51@gmail.com', '0cbc4258b8447edd871c35fb3101905e', '0964537251', '2024-12-24 12:46:23'),
+(89, 'Phạm Phú', 'phamphu52', 'phu52@gmail.com', 'cf059dd1ac241c05d89c99e47467b8ac', '0964537252', '2024-12-24 12:46:23'),
+(90, 'Đặng Kim', 'dangkim53', 'kim53@gmail.com', '079b0db04aa2140d4db479eea34a6d94', '0964537253', '2024-12-24 12:46:23'),
+(91, 'Lê Tuyết', 'letuyet54', 'tuyet54@gmail.com', '3db5399f35411bc5648a693fc318e2dc', '0964537254', '2024-12-24 12:46:23'),
+(92, 'Trần Sang', 'transang55', 'sang55@gmail.com', 'de38973f5c2e35f57953752113303bc9', '0964537255', '2024-12-24 12:46:23'),
+(93, 'Nguyễn Linh', 'nguyenlinh56', 'linh56@gmail.com', '96e817ee614816618810a7538b244e70', '0964537256', '2024-12-24 12:46:23'),
+(94, 'Phạm Vân', 'phamvan57', 'van57@gmail.com', '46dc58bc6a862ad496987cd951d90485', '0964537257', '2024-12-24 12:46:23'),
+(95, 'Lê Đông', 'ledong58', 'dong58@gmail.com', '47f9eb26e951fa8ff83a7ad61a587ec0', '0964537258', '2024-12-24 12:46:23'),
+(96, 'Ngô Nam', 'ngonam59', 'nam59@gmail.com', '7cdfc355db30d7162e5e44a75dab5c68', '0964537259', '2024-12-24 12:46:23'),
+(97, 'Trần Huy', 'tranhuy60', 'huy60@gmail.com', '8e33c8e9add3e5a71bf8fee113dd7d36', '0964537260', '2024-12-24 12:46:23'),
+(98, 'Hoàng Cường', 'hoangcuong61', 'cuong61@gmail.com', 'aca56b973fd5c8ace2ab1e8249cc5187', '0964537261', '2024-12-24 12:46:23'),
+(99, 'Nguyễn Thúy', 'nguyenthuy62', 'thuy62@gmail.com', 'fb29a85ed48ed5fb46c019247c3e5ddd', '0964537262', '2024-12-24 12:46:23'),
+(100, 'Phạm Hùng', 'phamhung63', 'hung63@gmail.com', 'a81f639cb4e15afa8b450b3f50a65fec', '0964537263', '2024-12-24 12:46:23'),
+(101, 'Lê Tùng', 'letung64', 'tung64@gmail.com', '35d225e3607d556a8d7261657010008e', '0964537264', '2024-12-24 12:46:23'),
+(102, 'Đặng Tâm', 'dangtam65', 'tam65@gmail.com', '7912ac4d00a3bc3e270cd53c3f8e049c', '0964537265', '2024-12-24 12:46:23'),
+(103, 'Hoàng Lộc', 'hoangloc66', 'loc66@gmail.com', 'f07c8a78e8a35b2794d832b341a286b4', '0964537266', '2024-12-24 12:46:23'),
+(104, 'Ngô Duy', 'ngoduy67', 'duy67@gmail.com', '01775e31282341acf14ec433c227c33e', '0964537267', '2024-12-24 12:46:23'),
+(105, 'Trần Ninh', 'tranninh68', 'ninh68@gmail.com', 'b8dc9e0d1aa7beec7e5e5394d2d81b9a', '0964537268', '2024-12-24 12:46:23'),
+(106, 'Phạm Khang', 'phamkhang69', 'khang69@gmail.com', '803d9aa6a0035d6ec249bd89216586b7', '0964537269', '2024-12-24 12:46:23'),
+(107, 'Nguyễn Lam', 'nguyenlam70', 'lam70@gmail.com', '4a7d93bb01d6ef976314cf7f96f67205', '0964537270', '2024-12-24 12:46:23'),
+(108, 'Đặng Lê', 'dangle71', 'le71@gmail.com', '64ef46caad2d9fc03c00feebfcc02311', '0964537271', '2024-12-24 12:46:23'),
+(109, 'Hoàng Nhật', 'hoangnhat72', 'nhat72@gmail.com', '7633224c31e7e6d3eabedd37a5142499', '0964537272', '2024-12-24 12:46:23'),
+(110, 'Lê Ánh', 'leanh73', 'anh73@gmail.com', '584c61264b3bbb6c79ed2d65724a15a0', '0964537273', '2024-12-24 12:46:23'),
+(111, 'Ngô Yến', 'ngoyen74', 'yen74@gmail.com', '75876070d882f3142b18bed642e7173c', '0964537274', '2024-12-24 12:46:23'),
+(112, 'Phạm Nhật', 'phamnhat75', 'nhat75@gmail.com', '0b5b7f3b4d88212ddfa6556c1a16ac27', '0964537275', '2024-12-24 12:46:23'),
+(113, 'Trần Tiến', 'trantien76', 'tien76@gmail.com', '6d3d8ad65ed702fc48ac8fea34bb5e4e', '0964537276', '2024-12-24 12:46:23'),
+(114, 'Nguyễn Tường', 'nguyentruong77', 'truong77@gmail.com', 'bd62cf24fdbe2082726fa37c886cb1c5', '0964537277', '2024-12-24 12:46:23'),
+(115, 'Đặng Nghĩa', 'dangnghia78', 'nghia78@gmail.com', '4ce79eff837b43861f52d6e9bda236d6', '0964537278', '2024-12-24 12:46:23'),
+(116, 'Lê Hùng', 'lehung79', 'hung79@gmail.com', '900a313c501ac9feca922e4dc19493e7', '0964537279', '2024-12-24 12:46:23'),
+(117, 'Hoàng Thịnh', 'hoangthinh80', 'thinh80@gmail.com', '0e8098e8c83a26c48ab2537338831d58', '0964537280', '2024-12-24 12:46:23');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -225,49 +750,72 @@ create table `tbl_blog`(
 -- Chỉ mục cho bảng `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  ADD PRIMARY KEY (`id_admin`);
+  ADD PRIMARY KEY (`id_admin`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Chỉ mục cho bảng `tbl_blog`
+--
+ALTER TABLE `tbl_blog`
+  ADD PRIMARY KEY (`id_blog`);
+
+--
+-- Chỉ mục cho bảng `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
+  ADD PRIMARY KEY (`id_cart`),
+  ADD KEY `fk_cart_user` (`id_user`);
 
 --
 -- Chỉ mục cho bảng `tbl_cart_detail`
 --
 ALTER TABLE `tbl_cart_detail`
-  ADD PRIMARY KEY (`id_cart_detail`);
+  ADD PRIMARY KEY (`id_cart_detail`),
+  ADD KEY `fk_cart_detail_cart` (`id_cart`),
+  ADD KEY `fk_cart_detail_sanpham` (`id_sanpham`);
 
 --
--- Chỉ mục cho bảng `tbl_dangky`
+-- Chỉ mục cho bảng `tbl_category`
 --
-ALTER TABLE `tbl_dangky`
-  ADD PRIMARY KEY (`id_khachhang`);
+ALTER TABLE `tbl_category`
+  ADD PRIMARY KEY (`id_category`);
 
 --
--- Chỉ mục cho bảng `tbl_danhmuc`
+-- Chỉ mục cho bảng `tbl_contact`
 --
-ALTER TABLE `tbl_danhmuc`
-  ADD PRIMARY KEY (`id_danhmuc`);
+ALTER TABLE `tbl_contact`
+  ADD PRIMARY KEY (`id_contact`),
+  ADD KEY `fk_contact_user` (`id_user`);
 
 --
--- Chỉ mục cho bảng `tbl_giohang`
+-- Chỉ mục cho bảng `tbl_order`
 --
-ALTER TABLE `tbl_giohang`
-  ADD PRIMARY KEY (`id_cart`);
+ALTER TABLE `tbl_order`
+  ADD PRIMARY KEY (`id_order`),
+  ADD KEY `fk_order_user` (`id_user`),
+  ADD KEY `fk_order_cart` (`id_cart`);
+
+--
+-- Chỉ mục cho bảng `tbl_order_detail`
+--
+ALTER TABLE `tbl_order_detail`
+  ADD PRIMARY KEY (`id_order_detail`),
+  ADD KEY `fk_order_detail_order` (`id_order`),
+  ADD KEY `fk_order_detail_sanpham` (`id_sanpham`);
 
 --
 -- Chỉ mục cho bảng `tbl_sanpham`
 --
 ALTER TABLE `tbl_sanpham`
-  ADD PRIMARY KEY (`id_sanpham`);
+  ADD PRIMARY KEY (`id_sanpham`),
+  ADD KEY `fk_sanpham_category` (`id_category`);
 
 --
--- Chỉ mục cho bảng `tbl_shipping`
+-- Chỉ mục cho bảng `tbl_user`
 --
-ALTER TABLE `tbl_shipping`
-  ADD PRIMARY KEY (`id_shipping`);
-  
-  --
--- Chỉ mục cho bảng `tbl_blog`
---
-ALTER TABLE `tbl_blog`
-  ADD PRIMARY KEY (`id_blog`);
+ALTER TABLE `tbl_user`
+  ADD PRIMARY KEY (`id_user`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -277,31 +825,43 @@ ALTER TABLE `tbl_blog`
 -- AUTO_INCREMENT cho bảng `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `tbl_blog`
+--
+ALTER TABLE `tbl_blog`
+  MODIFY `id_blog` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
+  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_cart_detail`
 --
 ALTER TABLE `tbl_cart_detail`
-  MODIFY `id_cart_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_cart_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_dangky`
+-- AUTO_INCREMENT cho bảng `tbl_contact`
 --
-ALTER TABLE `tbl_dangky`
-  MODIFY `id_khachhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `tbl_contact`
+  MODIFY `id_contact` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_danhmuc`
+-- AUTO_INCREMENT cho bảng `tbl_order`
 --
-ALTER TABLE `tbl_danhmuc`
-  MODIFY `id_danhmuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `tbl_order`
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_giohang`
+-- AUTO_INCREMENT cho bảng `tbl_order_detail`
 --
-ALTER TABLE `tbl_giohang`
-  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+ALTER TABLE `tbl_order_detail`
+  MODIFY `id_order_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_sanpham`
@@ -310,18 +870,56 @@ ALTER TABLE `tbl_sanpham`
   MODIFY `id_sanpham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_shipping`
+-- AUTO_INCREMENT cho bảng `tbl_user`
 --
-ALTER TABLE `tbl_shipping`
-  MODIFY `id_shipping` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-  
+ALTER TABLE `tbl_user`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+
 --
--- AUTO_INCREMENT cho bảng `tbl_blog`
+-- Các ràng buộc cho các bảng đã đổ
 --
-  ALTER TABLE `tbl_blog`
-  MODIFY `id_blog` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Các ràng buộc cho bảng `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
+  ADD CONSTRAINT `fk_cart_user` FOREIGN KEY (`id_user`) REFERENCES `tbl_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_cart_detail`
+--
+ALTER TABLE `tbl_cart_detail`
+  ADD CONSTRAINT `fk_cart_detail_cart` FOREIGN KEY (`id_cart`) REFERENCES `tbl_cart` (`id_cart`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_cart_detail_sanpham` FOREIGN KEY (`id_sanpham`) REFERENCES `tbl_sanpham` (`id_sanpham`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_contact`
+--
+ALTER TABLE `tbl_contact`
+  ADD CONSTRAINT `fk_contact_user` FOREIGN KEY (`id_user`) REFERENCES `tbl_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_order`
+--
+ALTER TABLE `tbl_order`
+  ADD CONSTRAINT `fk_order_cart` FOREIGN KEY (`id_cart`) REFERENCES `tbl_cart` (`id_cart`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_order_user` FOREIGN KEY (`id_user`) REFERENCES `tbl_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_order_detail`
+--
+ALTER TABLE `tbl_order_detail`
+  ADD CONSTRAINT `fk_order_detail_order` FOREIGN KEY (`id_order`) REFERENCES `tbl_order` (`id_order`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_order_detail_sanpham` FOREIGN KEY (`id_sanpham`) REFERENCES `tbl_sanpham` (`id_sanpham`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_sanpham`
+--
+ALTER TABLE `tbl_sanpham`
+  ADD CONSTRAINT `fk_sanpham_category` FOREIGN KEY (`id_category`) REFERENCES `tbl_category` (`id_category`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
